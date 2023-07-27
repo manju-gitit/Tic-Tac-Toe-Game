@@ -17,7 +17,7 @@ const Board = () => {
     };
     function renderSquare(i) {
       // use properties to pass callback function takeTurn to Child
-      return <Square takeTurn={takeTurn} id={i}></Square>;
+      return <Square takeTurn={takeTurn} id={i} player={player}></Square>;
     }
   
     return (
@@ -42,13 +42,14 @@ const Board = () => {
             Part 1 step 2 code goes here 
             Display the player's turn <h1>
           */}
+          <h1 id="turn">Next Player: Player{player}</h1>
           <h1>{status}</h1>
         </div>
       </div>
     );
   };
   
-  const Square = ({ takeTurn, id }) => {
+  const Square = ({ takeTurn, id, player }) => {
     const mark = ['O', 'X', '+'];
     // id is the square's number
     // filled tells you if square has been filled
@@ -56,10 +57,11 @@ const Board = () => {
     // You call takeTurn to tell Parent that the square has been filled
     const [filled, setFilled] = React.useState(false);
     const [tik, setTik] = React.useState(2);
-  
+    console.log(`player: ${player}`); 
     return (
       <button
         // Part 2: update the return statement below to add css classes
+        className={tik == '1' ? 'red' : 'white'}
         onClick={() => {
           setTik(takeTurn(id));
           setFilled(true);
